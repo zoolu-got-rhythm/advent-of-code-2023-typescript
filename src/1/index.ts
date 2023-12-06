@@ -3,7 +3,7 @@ import { open as openFile } from "node:fs/promises";
 // part 1
 (async () => {
     let firstLastNumbersOnEachLineAsDoubleDigits: number[] = [];
-    const absoluteFilePath = `${process.cwd()}/src/1/puzzleInput.txt`;
+    const absoluteFilePath = `${process.cwd()}/src/1/puzzleInputPart1.txt`;
     const file = await openFile(absoluteFilePath);
 
     for await (const line of file.readLines()) {
@@ -19,5 +19,5 @@ import { open as openFile } from "node:fs/promises";
         (prev, acum) => prev + acum,
     );
 
-    console.log("sum of double digit numbers", sumOfDoubleDigits);
+    console.log("sum of double digit numbers for part 1 =", sumOfDoubleDigits);
 })();
