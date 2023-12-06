@@ -7,10 +7,10 @@ import { open as openFile } from "node:fs/promises";
     const file = await openFile(absoluteFilePath);
 
     for await (const line of file.readLines()) {
-        const numberMatches = (line as string).match(/\d/g)!;
+        const numberMatches: string[] = (line as string).match(/\d/g)!;
         const firstNumber = numberMatches[0];
         const secondNumber = numberMatches[numberMatches.length - 1];
-        const doubleDigitString: string = String(firstNumber) + String(secondNumber);
+        const doubleDigitString: string = firstNumber + secondNumber; // string concatenation
         const doubleDigitNumeric: number = Number(doubleDigitString);
         firstLastNumbersOnEachLineAsDoubleDigits.push(doubleDigitNumeric);
     }
