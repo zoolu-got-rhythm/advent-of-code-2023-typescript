@@ -16,7 +16,7 @@ const sumOfFirstAndLastDigitsFoundOnEachLine = async (searchType: SearchType) =>
         } else {
             // else === "wordAndNumberSearch"
             const numbersAsWordsMatches = (line as string).match(
-                /\d|(?<=o)ne|(?<=t)wo|(?<=t)hree|(?<=f)our|(?<=f)ive|(?<=s)ix|(?<=s)even|(?<=e)ight|(?<=n)ine/g, // positive look behind's
+                /\d|(?<=o)ne|(?<=t)wo|(?<=t)hree|(?<=f)our|(?<=f)ive|(?<=s)ix|(?<=s)even|(?<=e)ight|(?<=n)ine/g // positive look behind's
             );
             if (numbersAsWordsMatches === null) {
                 // console.log("line", line);
@@ -28,11 +28,11 @@ const sumOfFirstAndLastDigitsFoundOnEachLine = async (searchType: SearchType) =>
                         numberWordOrNumber.length > 1
                             ? numbersAsStrings.indexOf(
                                   numbersAsStrings.find((numberAsWordWithoutFirstLetter) =>
-                                      numberAsWordWithoutFirstLetter.includes(numberWordOrNumber),
-                                  )!,
+                                      numberAsWordWithoutFirstLetter.includes(numberWordOrNumber)
+                                  )!
                               )
-                            : numberWordOrNumber,
-                    ),
+                            : numberWordOrNumber
+                    )
                 );
             });
         }
