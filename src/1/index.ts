@@ -16,6 +16,7 @@ const x = async (searchType: SearchType) => {
         } else {
             const numbersAsWordsMatches = (line as string).match(/one|two|three|four|five|six|seven|eight|nine/g);
             if (numbersAsWordsMatches === null) {
+                console.log("line", line);
                 continue;
             }
             numbersAsWordsMatches?.forEach((numberWord) => {
