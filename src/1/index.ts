@@ -1,8 +1,6 @@
 import { open as openFile } from "node:fs/promises";
-import { SourceTextModule } from "node:vm";
 
 type SearchType = "wordAndNumberSearch" | "numberSearch";
-// part 1
 const sumOfFirstAndLastDigitsFoundOnEachLine = async (searchType: SearchType) => {
     let firstLastNumbersOnEachLineAsDoubleDigits: number[] = [];
     const absoluteFilePath = `${process.cwd()}/src/1/puzzleInputPart1.txt`;
@@ -19,7 +17,6 @@ const sumOfFirstAndLastDigitsFoundOnEachLine = async (searchType: SearchType) =>
                 /\d|(?<=o)ne|(?<=t)wo|(?<=t)hree|(?<=f)our|(?<=f)ive|(?<=s)ix|(?<=s)even|(?<=e)ight|(?<=n)ine/g // positive look behind's
             );
             if (numbersAsWordsMatches === null) {
-                // console.log("line", line);
                 continue;
             }
             numbersAsWordsMatches.forEach((numberWordOrNumber: string) => {
