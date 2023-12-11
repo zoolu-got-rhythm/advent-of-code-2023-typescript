@@ -3,7 +3,7 @@ import { open as openFile } from "node:fs/promises";
 type SearchType = "wordAndNumberSearch" | "numberSearch";
 const sumOfFirstAndLastDigitsFoundOnEachLine = async (searchType: SearchType) => {
     let firstLastNumbersOnEachLineAsDoubleDigits: number[] = [];
-    const absoluteFilePath = `${process.cwd()}/src/1/puzzleInputPart1.txt`;
+    const absoluteFilePath = `${__dirname}/../../src/1/puzzleInputPart1.txt`;
     const file = await openFile(absoluteFilePath);
 
     const numbersAsStrings: string[] = "zero one two three four five six seven eight nine".split(" ");
