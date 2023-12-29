@@ -104,8 +104,8 @@ async function sumMultipliedNumbersWithAdjacentStarChar(): Promise<number> {
             linesArr.push(line);
         }
 
+        let map: { [key: string]: number[] } = {};
 
-        let map: any = {};
         linesArr.forEach((row, rowIndex) => {
             const matches = row.matchAll(/(\d+)/g);
 
