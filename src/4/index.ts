@@ -21,7 +21,7 @@ async function getTotalScratchCardWinsPoints(absoluteFilePath: string): Promise<
     return new Promise(async (resolve, _) => {
         const linesArr: string[] = await getFileLinesAsArr(absoluteFilePath);
 
-        let scratchCardPointsArr: number[] = linesArr.map((row, rowIndex) => {
+        let scratchCardPointsArr: number[] = linesArr.map((row: string) => {
             let [scratchedAnswers, correctAnswers] = splitLineIntoScratchedAndCorrectAnswersArrs(row);
 
             let points = 0;
@@ -49,7 +49,7 @@ async function countTotalScratchCardCopies(absoluteFilePath: string): Promise<nu
       
         let cardCopiesArr: number[] = [];
 
-        linesArr.forEach((row, rowIndex) => {
+        linesArr.forEach((row: string, rowIndex: number) => {
             let [scratchedAnswers, correctAnswers] = splitLineIntoScratchedAndCorrectAnswersArrs(row);
 
             cardCopiesArr[rowIndex] =
