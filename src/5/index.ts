@@ -1,44 +1,7 @@
+import { Worker } from "node:worker_threads";
 import { InvalidKeyException } from "../utils/InvalidKeyException";
 import { getAllFileLinesAsString } from "../utils/getFileLinesAsArr";
-
-type MapType = { [key: string]: { [key: number]: { source: number; range: number } } };
-
-function getNextDestinationNumber(map: MapType, destinationToSourceMapKey: string, destinationLookUpNumber: number): number {
-    if (!(destinationToSourceMapKey in map)) {
-        throw new InvalidKeyException("key was not found/does not exist in destionation-to-source map");
-    }
-
-    // should always return a maximum array of length 1? or empty array
-    let destinationToSourceMapKeys = Object.keys(map[destinationToSourceMapKey]).filter((key) => {
-        return (
-            destinationLookUpNumber >= map[destinationToSourceMapKey][Number(key)].source &&
-            destinationLookUpNumber <=
-                map[destinationToSourceMapKey][Number(key)].source + map[destinationToSourceMapKey][Number(key)].range
-        );
-    });
-
-    if (destinationToSourceMapKeys.length === 0) {
-        return destinationLookUpNumber;
-    }
-
-    const destinationKey = Number(destinationToSourceMapKeys[destinationToSourceMapKeys.length - 1]);
-    const diff = destinationKey - map[destinationToSourceMapKey][destinationKey].source;
-
-    return destinationLookUpNumber + diff;
-}
-
-function getLocationFromInitialSeedNumber(map: MapType, initialSeedNumber: number) {
-    let location = initialSeedNumber;
-    Object.keys(map).forEach((destinationToSourceMapKey: string) => {
-        try {
-            location = getNextDestinationNumber(map, destinationToSourceMapKey, location);
-        } catch (error: any) {
-            console.log("looking up key: " + destinationToSourceMapKey + ",", error.name + ":", error.message);
-            process.exit(1);
-        }
-    });
-    return location;
-}
+import { MapType, getLocationFromInitialSeedNumber } from "./getLocationFromInitialSeedNumber.ts";
 
 async function getLowestLocationNumberFromSeeds(
     treatSeedsDataAsSeedAndRange: boolean,
@@ -79,32 +42,49 @@ async function getLowestLocationNumberFromSeeds(
             });
         }
 
+        const threads: Set<Worker> = new Set();
+
         let lowestLocationNumber = 100000000000000000; // arbitrarily long/big number which something can be lower than
 
-        let count = 0;
+        // let count = 0;
+
+        let GetLowestLocationNumberFromSeedsThreadArr: Promise<number>[] = [];
 
         if (treatSeedsDataAsSeedAndRange) {
             for (let i = 0; i < seedsArr.length; i += 2) {
-                console.log("range ", i);
-                for (let j = seedsArr[i]; j < seedsArr[i] + seedsArr[i + 1]; j++) {
-                    console.log(++count);
-                    // console.log("j", j);
-                    const locatinoNumber = getLocationFromInitialSeedNumber(map, j);
-                    if (locatinoNumber < lowestLocationNumber) lowestLocationNumber = locatinoNumber;
-                }
+                GetLowestLocationNumberFromSeedsThreadArr.push(
+                    new Promise<number>((resolve, reject) => {
+                        const workerThread = new Worker("./dist/5/workerFile.js", {
+                            workerData: { startRange: seedsArr[i], endRange: seedsArr[i] + seedsArr[i + 1], map: map }
+                        });
+
+                        workerThread.on("online", () => {
+                            console.log(`thread ${i === 0 ? 0 : i - 1} started execution`);
+                        });
+                        workerThread.on("error", reject);
+                        workerThread.on("exit", (code) => {
+                            // threads.delete(thread);
+                            // console.log(`Thread exiting, ${threads.size} running...`);
+                        });
+                        workerThread.on("message", resolve);
+                    })
+                );
+                // }
             }
+
+            const lowestFoundLocationNumbersFromThreads: number[] = await Promise.all(
+                GetLowestLocationNumberFromSeedsThreadArr
+            );
+
+            // take lowest location number of thread results
+            lowestLocationNumber = lowestFoundLocationNumbersFromThreads.reduce((prev, acum) => (prev < acum ? prev : acum));
+
         } else {
             for (let i = 0; i < seedsArr.length; i++) {
                 const locatinoNumber = getLocationFromInitialSeedNumber(map, seedsArr[i]);
                 if (locatinoNumber < lowestLocationNumber) lowestLocationNumber = locatinoNumber;
             }
         }
-
-        // let lowestToHighest = seedsArr
-        //     .map((initialSeedNumber: number) => {
-        //         return getLocationFromInitialSeedNumber(map, initialSeedNumber);
-        //     })
-        //     .sort((a, b) => a - b);
 
         resolve(lowestLocationNumber);
     });
