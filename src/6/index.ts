@@ -1,28 +1,38 @@
+
+
+// believe achieved this one in O(n) linear time, refactored from O(n2) originally (2 loops oppose to just 1)
 function getDistanceTraveledGivenHoldTime(holdTimeInMs: number, totalRaceTime: number) {
-    let totalDistanceTravelledInMillimeters = 0;
-    for (let i = holdTimeInMs + 1; i < totalRaceTime; i++) {
-        totalDistanceTravelledInMillimeters += holdTimeInMs;
-    }
-    totalDistanceTravelledInMillimeters += holdTimeInMs;
-    return totalDistanceTravelledInMillimeters;
+    let steps = totalRaceTime - holdTimeInMs;
+    return steps * holdTimeInMs;
 }
 
-function getHoldTimesThatWinGivenDistance(totalRaceTime: number, distance: number) {
+function getHoldTimesThatWinGivenDistance(totalRaceTime: number, distanceToBeat: number, startHoldTime?: number) {
     let holdTimesThatWin = [];
-    for (let i = 1; i <= distance; i++) {
-        if (i % 1000 === 0) {
-            console.log("progress=" + i / distance + "%");
-        }
+
+    let isInThreshold = null;
+    for (let i = startHoldTime || 1; i <= distanceToBeat; i++) {
         let distanceFromHoldTimeInMillimeters = getDistanceTraveledGivenHoldTime(i, totalRaceTime);
-        if (distanceFromHoldTimeInMillimeters > distance) {
+        if (distanceFromHoldTimeInMillimeters > distanceToBeat) {
             holdTimesThatWin.push(i);
-            // continue;
+            isInThreshold = true;
+        } else {
+            if (isInThreshold == true) {
+                break;
+            }
         }
     }
     return holdTimesThatWin;
 }
 
-// console.log(getHoldTimesThatWinGivenDistance(30, 200));
+function concatNumbersIntoNewSingleNumber(numbers: number[]): number {
+    return Number(
+        numbers
+            .map((n) => {
+                return String(n);
+            })
+            .join("")
+    );
+}
 
 const puzzleInput = [
     { t: 49, d: 263 },
@@ -31,7 +41,7 @@ const puzzleInput = [
     { t: 94, d: 1851 }
 ];
 
-console.log(
+console.log(`result 1 = ${
     puzzleInput
         // lengths of arrs as new arr
         .map((obj) => {
@@ -40,23 +50,12 @@ console.log(
         // product
         .reduce((prev, acum) => {
             return prev * acum;
-        })
+        })}`
 );
 
-const t = Number(
-    puzzleInput
-        .map((obj) => {
-            return String(obj.t);
-        })
-        .join("")
-);
+const timeAllowedForRace = concatNumbersIntoNewSingleNumber(puzzleInput.map((obj) => obj.t));
+const distanceToBeatInRace = concatNumbersIntoNewSingleNumber(puzzleInput.map((obj) => obj.d));
 
-const d = Number(
-    puzzleInput
-        .map((obj) => {
-            return String(obj.d);
-        })
-        .join("")
-);
-
-console.log(getHoldTimesThatWinGivenDistance(t, d).length);
+let startTime = Date.now();
+console.log(`result 2 = ${getHoldTimesThatWinGivenDistance(timeAllowedForRace, distanceToBeatInRace, 1000000).length}`);
+console.log(`time taken to compute result 2 = ${Date.now() - startTime}`);
