@@ -1,6 +1,6 @@
 
-### Advent Of Code 2023 TypeScript Implementations
-## how to run
+## Advent Of Code 2023 TypeScript Implementations
+### how to run
 
 from project root run
 `npm i`
