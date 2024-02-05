@@ -3,7 +3,11 @@ import { InvalidKeyException } from "../utils/InvalidKeyException";
 // almanac map type: see https://adventofcode.com/2023/day/5 for recap on what that is
 export type CategorySourceToDestinationMapType = { [key: string]: { [key: number]: { source: number; range: number } } };
 
-function getNextDestinationNumber(map: CategorySourceToDestinationMapType, destinationToSourceMapKey: string, destinationLookUpNumber: number): number {
+function getNextDestinationNumber(
+    map: CategorySourceToDestinationMapType,
+    destinationToSourceMapKey: string,
+    destinationLookUpNumber: number
+): number {
     // if (!(destinationToSourceMapKey in map)) {
     //     throw new InvalidKeyException("key was not found/does not exist in destionation-to-source map");
     // }
