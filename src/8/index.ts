@@ -11,8 +11,7 @@ const nodeLookUpDataSetExample: NodeLookUpDataSet = {
 
 const leftRightInstructionsExample = "LLR";
 
-// problem set input
-const leftRightInstructionsExample2 = "RL";
+// problem set example input
 const nodeLookUpDataSetExample2: NodeLookUpDataSet = {
     AAA: { L: "BBB", R: "CCC" },
     BBB: { L: "DDD", R: "EEE" },
@@ -22,6 +21,8 @@ const nodeLookUpDataSetExample2: NodeLookUpDataSet = {
     GGG: { L: "GGG", R: "GGG" },
     ZZZ: { L: "ZZZ", R: "ZZZ" }
 };
+
+const leftRightInstructionsExample2 = "RL";
 
 function getNumberOfStepsTillDestinationNode(
     nodesDataSet: NodeLookUpDataSet,
@@ -50,29 +51,28 @@ function isWholeNumber(n: number) {
     return remainder === 0 || remainder === 1;
 }
 
-// only works for even numbers?
 function getLowestCommonMultiplier(numbers: number[]) {
-   
-    let i = 1;
+    // max
+    const highestNumber = numbers.reduce((prev, acum) => (prev > acum ? prev : acum));
+
+    let lcm = highestNumber;
     while (true) {
-        let currentCommonMultiple = 0;
-        console.log("current multiple", currentCommonMultiple);
+        let allNumbersDivisible = false;
         for (let j = 0; j < numbers.length; j++) {
-            let n = numbers[j];
-            if(currentCommonMultiple > 0){
-                if((n * i !== currentCommonMultiple)){
-                    break;
-                }
-            }else{
-                currentCommonMultiple = n * i;
-            }
-            
-            if(j === numbers.length - 1){
-                return currentCommonMultiple;
+            const n = numbers[j];
+            if (isWholeNumber(lcm / n)) {
+                allNumbersDivisible = true;
+            } else {
+                allNumbersDivisible = false;
+                break;
             }
         }
 
-        i++;
+        if (allNumbersDivisible) {
+            return lcm;
+        }
+
+        lcm += highestNumber;
     }
 }
 
@@ -100,7 +100,4 @@ const absoluteFilePathPuzzleInput = `${__dirname}/../../src/8/puzzleInput.txt`;
     ) as number[];
 
     console.log(`part 2 result = ${getLowestCommonMultiplier(highestNumberOfStepsToGetToEndNode)}`);
-    // console.log(getLowestCommonMultiplier([4,10]));
 })();
-
-// console.log(getNumberOfStepsTillDestinationNode(nodeLookUpDataSet, leftRightInstructions, "ZZZ"));
