@@ -157,21 +157,24 @@ function getCardsWithHigherStrength(cardsA: string, cardsB: string, switchJCardT
     }
 }
 
-type KeyType = "original" | "jWildCard";
+type KeyType = "originalHand" | "jWildCardHand";
 interface CardValueMapping {
-    original: { [key: string]: EHandType };
-    jWildCard: { [key: string]: EHandType };
+    originalHand: { [key: string]: EHandType };
+    jWildCardHand: { [key: string]: EHandType };
+    bidAmount: number;
 }
 
-function getCardHandsInWeakestToStrongestOrder(dataSet: { [key: string]: number }, key: KeyType) {
-    let subSets: { [key: number]: string[] } = {};
+function getCardHandsInWeakestToStrongestOrder(cardValueMappingsArr: CardValueMapping[], key: KeyType) {
+    let subSets: { [key: number]: string[] } = {}; // [key: number] here is = [key: EHandType]
 
-    Object.keys(dataSet).forEach((val) => {
-        let x = getCardHandType(val); // val["original"] | val[jWildCard]
-        if (!(x in subSets)) {
-            subSets[x] = [val];
+    cardValueMappingsArr.forEach((obj) => {
+        // let x = getCardHandType(obj); // obj["original"] | obj[jWildCard]
+        let keyForCardHandType: string = Object.keys(obj[key])[0]; // cardHand
+        let cardHandType: EHandType = obj[key][keyForCardHandType]; // type of cardHand
+        if (!(cardHandType in subSets)) {
+            subSets[cardHandType] = [keyForCardHandType]
         } else {
-            subSets[x].push(val);
+            subSets[cardHandType].push(keyForCardHandType);
         }
     });
 
@@ -179,7 +182,7 @@ function getCardHandsInWeakestToStrongestOrder(dataSet: { [key: string]: number 
         .map((set: string[]) => {
             return set
                 .sort((handA, handB) => {
-                    if (getCardsWithHigherStrength(handA, handB, switchJCardToBeLowest) === handA) {
+                    if (getCardsWithHigherStrength(handA, handB, key === "jWildCardHand") === handA) {
                         return 1;
                     } else {
                         return -1;
@@ -201,8 +204,8 @@ const samplePuzzleInputMap: { [key: string]: number } = {
     QQQJA: 483
 };
 
-function getSumOfRankValues(mapDataSet: { [key: string]: number }, key: KeyType): number {
-    return getCardHandsInWeakestToStrongestOrder(mapDataSet, key)
+function getSumOfRankValues(cardValueMappingsArr: CardValueMapping[], key: KeyType): number {
+    return getCardHandsInWeakestToStrongestOrder(cardValueMappingsArr, key)
         .map((hand: string, i) => {
             return mapDataSet[hand] * (i + 1);
         })
@@ -215,22 +218,26 @@ function getSumOfRankValues(mapDataSet: { [key: string]: number }, key: KeyType)
     const absoluteFilePathPuzzleInput = `${__dirname}/../../src/7/puzzleInput.txt`;
 
     let puzzleInputAsArr: string[] = await getFileLinesAsArr(absoluteFilePathPuzzleInput);
-    let puzzleInputMap: { [key: string]: number } = {};
 
-    let cardToJWildCardMap: { [key: string]: string } = {};
     let cardValueMappingsArr: CardValueMapping[] = [];
     puzzleInputAsArr.forEach((line: string) => {
         const [cardHand, cardBidAmount] = line.split(" ");
-        let jWildCard = getCardHandWithJCardSubstitute(cardHand);
+
+        let jWildCardHandVersion = getCardHandWithJCardSubstitute(cardHand);
         let obj: CardValueMapping = {
-            original: {},
-            jWildCard: {}
+            originalHand: {},
+            jWildCardHand: {},
+            bidAmount: Number(cardBidAmount)
         };
-        obj.original[cardHand] = getCardValue(cardHand);
-        obj.jWildCard[jWildCard] = getCardValue(cardHand, true);
+        obj.originalHand[cardHand] = getCardHandType(cardHand);
+        obj.jWildCardHand[jWildCardHandVersion] = getCardHandType(jWildCardHandVersion);
+
         cardValueMappingsArr.push(obj);
     });
-    console.log(`part 1 answer = ${getSumOfRankValues(puzzleInputMap)}`);
+
+    console.log(cardValueMappingsArr);
+
+    console.log(`part 1 answer = ${getSumOfRankValues(cardValueMappingsArr, "original")}`);
     // console.log("test", getCardHandWithJCardSubstitute("KTJJT"));
-    console.log(cardToJWildCardMap);
+    // console.log(cardToJWildCardMap);
 })();
