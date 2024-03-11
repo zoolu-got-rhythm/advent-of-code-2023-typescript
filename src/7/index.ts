@@ -10,22 +10,6 @@ enum EHandType {
     HIGH_CARD
 }
 
-// const CardValuesMap: { [key: string | number]: number } = {
-//     2: 2,
-//     3: 3,
-//     4: 4,
-//     5: 5,
-//     6: 6,
-//     7: 7,
-//     8: 8,
-//     9: 9,
-//     T: 10,
-//     J: 11,
-//     Q: 12,
-//     K: 13,
-//     A: 14
-// };
-
 function getCardValuesMap(switchJCardToBeLowestValue?: boolean): { [key: string | number]: number } {
     return {
         2: 2,
@@ -49,7 +33,7 @@ function getCardValue(card: string | number, switchJCardToBeLowest?: boolean): n
     return cardValuesMap[card];
 }
 
-function getCardHandWithJCardSubstitute(cardHand: string) {
+export function getCardHandWithJCardSubstitutes(cardHand: string) {
     let cardsInHandArr = cardHand.split("");
     if (!cardsInHandArr.includes("J")) {
         return cardHand;
@@ -165,23 +149,25 @@ interface CardValueMapping {
 }
 
 function getCardHandsInWeakestToStrongestOrder(cardValueMappingsArr: CardValueMapping[], key: KeyType) {
-    let subSets: { [key: number]: string[] } = {}; // [key: number] here is = [key: EHandType]
+    let subSets: { [key: number]: CardValueMapping[] } = {}; // [key: number] here is = [key: EHandType]
 
     cardValueMappingsArr.forEach((obj) => {
-        // let x = getCardHandType(obj); // obj["original"] | obj[jWildCard]
         let keyForCardHandType: string = Object.keys(obj[key])[0]; // cardHand
         let cardHandType: EHandType = obj[key][keyForCardHandType]; // type of cardHand
         if (!(cardHandType in subSets)) {
-            subSets[cardHandType] = [keyForCardHandType]
+            subSets[cardHandType] = [obj];
         } else {
-            subSets[cardHandType].push(keyForCardHandType);
+            subSets[cardHandType].push(obj);
         }
     });
 
     return Object.values(subSets)
-        .map((set: string[]) => {
+        .map((set: CardValueMapping[]) => {
             return set
-                .sort((handA, handB) => {
+                .sort((objA, objB) => {
+                    let handA: string = Object.keys(objA.originalHand)[0]; // cardHand
+                    let handB: string = Object.keys(objB.originalHand)[0]; // cardHand
+
                     if (getCardsWithHigherStrength(handA, handB, key === "jWildCardHand") === handA) {
                         return 1;
                     } else {
@@ -196,18 +182,48 @@ function getCardHandsInWeakestToStrongestOrder(cardValueMappingsArr: CardValueMa
 
 // sample data test
 
-const samplePuzzleInputMap: { [key: string]: number } = {
-    "32T3K": 765,
-    T55J5: 684,
-    KK677: 28,
-    KTJJT: 220,
-    QQQJA: 483
-};
+const samplePuzzleInputMap: CardValueMapping[] = [
+    {
+        originalHand: { "32T3K": getCardHandType("32T3K") },
+        jWildCardHand: {
+            [getCardHandWithJCardSubstitutes("32T3K")]: getCardHandType(getCardHandWithJCardSubstitutes("32T3K"))
+        },
+        bidAmount: 765
+    },
+    {
+        originalHand: { T55J5: getCardHandType("T55J5") },
+        jWildCardHand: {
+            [getCardHandWithJCardSubstitutes("T55J5")]: getCardHandType(getCardHandWithJCardSubstitutes("T55J5"))
+        },
+        bidAmount: 684
+    },
+    {
+        originalHand: { KK677: getCardHandType("KK677") },
+        jWildCardHand: {
+            [getCardHandWithJCardSubstitutes("KK677")]: getCardHandType(getCardHandWithJCardSubstitutes("KK677"))
+        },
+        bidAmount: 28
+    },
+    {
+        originalHand: { KTJJT: getCardHandType("KTJJT") },
+        jWildCardHand: {
+            [getCardHandWithJCardSubstitutes("KTJJT")]: getCardHandType(getCardHandWithJCardSubstitutes("KTJJT"))
+        },
+        bidAmount: 220
+    },
+    {
+        originalHand: { QQQJA: getCardHandType("QQQJA") },
+        jWildCardHand: {
+            [getCardHandWithJCardSubstitutes("QQQJA")]: getCardHandType(getCardHandWithJCardSubstitutes("QQQJA"))
+        },
+        bidAmount: 483
+    }
+];
 
 function getSumOfRankValues(cardValueMappingsArr: CardValueMapping[], key: KeyType): number {
     return getCardHandsInWeakestToStrongestOrder(cardValueMappingsArr, key)
-        .map((hand: string, i) => {
-            return mapDataSet[hand] * (i + 1);
+        .map((obj: CardValueMapping, i) => {
+            return obj.bidAmount * (i + 1);
         })
         .reduce((prev, acum) => {
             return prev + acum;
@@ -223,7 +239,7 @@ function getSumOfRankValues(cardValueMappingsArr: CardValueMapping[], key: KeyTy
     puzzleInputAsArr.forEach((line: string) => {
         const [cardHand, cardBidAmount] = line.split(" ");
 
-        let jWildCardHandVersion = getCardHandWithJCardSubstitute(cardHand);
+        let jWildCardHandVersion = getCardHandWithJCardSubstitutes(cardHand);
         let obj: CardValueMapping = {
             originalHand: {},
             jWildCardHand: {},
@@ -235,9 +251,11 @@ function getSumOfRankValues(cardValueMappingsArr: CardValueMapping[], key: KeyTy
         cardValueMappingsArr.push(obj);
     });
 
-    console.log(cardValueMappingsArr);
+    // console.log(cardValueMappingsArr);
 
-    console.log(`part 1 answer = ${getSumOfRankValues(cardValueMappingsArr, "original")}`);
-    // console.log("test", getCardHandWithJCardSubstitute("KTJJT"));
+    // console.log(`part 1 answer = ${getSumOfRankValues(samplePuzzleInputMap, "originalHand")}`);
+    // console.log(`${getSumOfRankValues(samplePuzzleInputMap, "jWildCardHand")}`);
+
+    // console.log("test", getCardHandWithJCardSubstitutes("KTJJT"));
     // console.log(cardToJWildCardMap);
 })();

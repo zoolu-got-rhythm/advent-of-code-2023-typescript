@@ -1,0 +1,503 @@
+[
+  {
+    originalHand: { '3J4KT': 6 },
+    jWildCardHand: { '3K4KT': 5 },
+    bidAmount: 513
+  },
+  {
+    originalHand: { Q3K42: 6 },
+    jWildCardHand: { Q3K42: 6 },
+    bidAmount: 147
+  },
+  {
+    originalHand: { '29JQK': 6 },
+    jWildCardHand: { '29KQK': 5 },
+    bidAmount: 187
+  },
+  {
+    originalHand: { AAKA9: 3 },
+    jWildCardHand: { AAKA9: 3 },
+    bidAmount: 821
+  },
+  {
+    originalHand: { '555J5': 1 },
+    jWildCardHand: { '55555': 0 },
+    bidAmount: 571
+  },
+  {
+    originalHand: { '64JQ2': 6 },
+    jWildCardHand: { '64QQ2': 5 },
+    bidAmount: 388
+  },
+  {
+    originalHand: { A29J2: 5 },
+    jWildCardHand: { A2922: 3 },
+    bidAmount: 877
+  },
+  {
+    originalHand: { '33399': 2 },
+    jWildCardHand: { '33399': 2 },
+    bidAmount: 59
+  },
+  {
+    originalHand: { AJ7A8: 5 },
+    jWildCardHand: { AA7A8: 3 },
+    bidAmount: 312
+  },
+  {
+    originalHand: { '3AA83': 4 },
+    jWildCardHand: { '3AA83': 4 },
+    bidAmount: 474
+  },
+  {
+    originalHand: { '9J979': 3 },
+    jWildCardHand: { '99979': 1 },
+    bidAmount: 218
+  },
+  {
+    originalHand: { '78478': 4 },
+    jWildCardHand: { '78478': 4 },
+    bidAmount: 432
+  },
+  {
+    originalHand: { '96644': 4 },
+    jWildCardHand: { '96644': 4 },
+    bidAmount: 502
+  },
+  {
+    originalHand: { JKK8T: 5 },
+    jWildCardHand: { KKK8T: 3 },
+    bidAmount: 647
+  },
+  {
+    originalHand: { '33924': 5 },
+    jWildCardHand: { '33924': 5 },
+    bidAmount: 127
+  },
+  {
+    originalHand: { '56J42': 6 },
+    jWildCardHand: { '56J42': 6 },
+    bidAmount: 864
+  },
+  {
+    originalHand: { '28J66': 5 },
+    jWildCardHand: { '28666': 3 },
+    bidAmount: 208
+  },
+  {
+    originalHand: { '44494': 1 },
+    jWildCardHand: { '44494': 1 },
+    bidAmount: 469
+  },
+  {
+    originalHand: { '93939': 2 },
+    jWildCardHand: { '93939': 2 },
+    bidAmount: 167
+  },
+  {
+    originalHand: { '62224': 3 },
+    jWildCardHand: { '62224': 3 },
+    bidAmount: 191
+  },
+  {
+    originalHand: { '4T3TT': 3 },
+    jWildCardHand: { '4T3TT': 3 },
+    bidAmount: 447
+  },
+  {
+    originalHand: { '69J99': 3 },
+    jWildCardHand: { '69999': 1 },
+    bidAmount: 217
+  },
+  {
+    originalHand: { '7ATJ7': 5 },
+    jWildCardHand: { '7AT77': 3 },
+    bidAmount: 99
+  },
+  {
+    originalHand: { '8325T': 6 },
+    jWildCardHand: { '8325T': 6 },
+    bidAmount: 792
+  },
+  {
+    originalHand: { T3444: 3 },
+    jWildCardHand: { T3444: 3 },
+    bidAmount: 545
+  },
+  {
+    originalHand: { '99J9A': 3 },
+    jWildCardHand: { '9999A': 1 },
+    bidAmount: 968
+  },
+  {
+    originalHand: { '5J474': 5 },
+    jWildCardHand: { '54474': 3 },
+    bidAmount: 724
+  },
+  {
+    originalHand: { Q89K2: 6 },
+    jWildCardHand: { Q89K2: 6 },
+    bidAmount: 739
+  },
+  {
+    originalHand: { '7KJJK': 4 },
+    jWildCardHand: { '7KKKK': 1 },
+    bidAmount: 565
+  },
+  {
+    originalHand: { '53A33': 3 },
+    jWildCardHand: { '53A33': 3 },
+    bidAmount: 716
+  },
+  {
+    originalHand: { TQ5QA: 5 },
+    jWildCardHand: { TQ5QA: 5 },
+    bidAmount: 573
+  },
+  {
+    originalHand: { TQJK5: 6 },
+    jWildCardHand: { TQKK5: 5 },
+    bidAmount: 109
+  },
+  {
+    originalHand: { JQ4QQ: 3 },
+    jWildCardHand: { QQ4QQ: 1 },
+    bidAmount: 436
+  },
+  {
+    originalHand: { TQ683: 6 },
+    jWildCardHand: { TQ683: 6 },
+    bidAmount: 219
+  },
+  {
+    originalHand: { QKA6A: 5 },
+    jWildCardHand: { QKA6A: 5 },
+    bidAmount: 711
+  },
+  {
+    originalHand: { '2T456': 6 },
+    jWildCardHand: { '2T456': 6 },
+    bidAmount: 365
+  },
+  {
+    originalHand: { TKT7K: 4 },
+    jWildCardHand: { TKT7K: 4 },
+    bidAmount: 292
+  },
+  {
+    originalHand: { Q96AJ: 6 },
+    jWildCardHand: { Q96AA: 5 },
+    bidAmount: 936
+  },
+  {
+    originalHand: { TTTT8: 1 },
+    jWildCardHand: { TTTT8: 1 },
+    bidAmount: 22
+  },
+  {
+    originalHand: { '9999A': 1 },
+    jWildCardHand: { '9999A': 1 },
+    bidAmount: 306
+  },
+  {
+    originalHand: { '6KA94': 6 },
+    jWildCardHand: { '6KA94': 6 },
+    bidAmount: 376
+  },
+  {
+    originalHand: { Q4A44: 3 },
+    jWildCardHand: { Q4A44: 3 },
+    bidAmount: 928
+  },
+  {
+    originalHand: { '3QKKQ': 4 },
+    jWildCardHand: { '3QKKQ': 4 },
+    bidAmount: 29
+  },
+  {
+    originalHand: { Q33Q3: 2 },
+    jWildCardHand: { Q33Q3: 2 },
+    bidAmount: 185
+  },
+  {
+    originalHand: { '83333': 1 },
+    jWildCardHand: { '83333': 1 },
+    bidAmount: 318
+  },
+  {
+    originalHand: { '3Q4AJ': 6 },
+    jWildCardHand: { '3Q4AA': 5 },
+    bidAmount: 668
+  },
+  {
+    originalHand: { '84T8A': 5 },
+    jWildCardHand: { '84T8A': 5 },
+    bidAmount: 696
+  },
+  {
+    originalHand: { '9T444': 3 },
+    jWildCardHand: { '9T444': 3 },
+    bidAmount: 108
+  },
+  {
+    originalHand: { K3A83: 5 },
+    jWildCardHand: { K3A83: 5 },
+    bidAmount: 245
+  },
+  {
+    originalHand: { '8TTJ6': 5 },
+    jWildCardHand: { '8TTT6': 3 },
+    bidAmount: 421
+  },
+  {
+    originalHand: { Q5442: 5 },
+    jWildCardHand: { Q5442: 5 },
+    bidAmount: 482
+  },
+  {
+    originalHand: { K64K6: 4 },
+    jWildCardHand: { K64K6: 4 },
+    bidAmount: 785
+  },
+  {
+    originalHand: { '969K6': 4 },
+    jWildCardHand: { '969K6': 4 },
+    bidAmount: 685
+  },
+  {
+    originalHand: { KQ333: 3 },
+    jWildCardHand: { KQ333: 3 },
+    bidAmount: 779
+  },
+  {
+    originalHand: { Q8277: 5 },
+    jWildCardHand: { Q8277: 5 },
+    bidAmount: 606
+  },
+  {
+    originalHand: { A5Q9A: 5 },
+    jWildCardHand: { A5Q9A: 5 },
+    bidAmount: 605
+  },
+  {
+    originalHand: { '7K22K': 4 },
+    jWildCardHand: { '7K22K': 4 },
+    bidAmount: 631
+  },
+  {
+    originalHand: { T459Q: 6 },
+    jWildCardHand: { T459Q: 6 },
+    bidAmount: 786
+  },
+  {
+    originalHand: { '7KT35': 6 },
+    jWildCardHand: { '7KT35': 6 },
+    bidAmount: 856
+  },
+  {
+    originalHand: { AJ6J6: 4 },
+    jWildCardHand: { A6666: 1 },
+    bidAmount: 444
+  },
+  {
+    originalHand: { '888KK': 2 },
+    jWildCardHand: { '888KK': 2 },
+    bidAmount: 297
+  },
+  {
+    originalHand: { '5AA55': 2 },
+    jWildCardHand: { '5AA55': 2 },
+    bidAmount: 723
+  },
+  {
+    originalHand: { '667AK': 5 },
+    jWildCardHand: { '667AK': 5 },
+    bidAmount: 838
+  },
+  {
+    originalHand: { '44447': 1 },
+    jWildCardHand: { '44447': 1 },
+    bidAmount: 834
+  },
+  {
+    originalHand: { Q2K77: 5 },
+    jWildCardHand: { Q2K77: 5 },
+    bidAmount: 238
+  },
+  {
+    originalHand: { K54AT: 6 },
+    jWildCardHand: { K54AT: 6 },
+    bidAmount: 977
+  },
+  {
+    originalHand: { '787QA': 5 },
+    jWildCardHand: { '787QA': 5 },
+    bidAmount: 755
+  },
+  {
+    originalHand: { K87QK: 5 },
+    jWildCardHand: { K87QK: 5 },
+    bidAmount: 54
+  },
+  {
+    originalHand: { '72AAQ': 5 },
+    jWildCardHand: { '72AAQ': 5 },
+    bidAmount: 278
+  },
+  {
+    originalHand: { '92279': 4 },
+    jWildCardHand: { '92279': 4 },
+    bidAmount: 356
+  },
+  {
+    originalHand: { '993Q7': 5 },
+    jWildCardHand: { '993Q7': 5 },
+    bidAmount: 310
+  },
+  {
+    originalHand: { '98488': 3 },
+    jWildCardHand: { '98488': 3 },
+    bidAmount: 676
+  },
+  {
+    originalHand: { '55584': 3 },
+    jWildCardHand: { '55584': 3 },
+    bidAmount: 835
+  },
+  {
+    originalHand: { KKK98: 3 },
+    jWildCardHand: { KKK98: 3 },
+    bidAmount: 9
+  },
+  {
+    originalHand: { '6T666': 1 },
+    jWildCardHand: { '6T666': 1 },
+    bidAmount: 603
+  },
+  {
+    originalHand: { '4A27T': 6 },
+    jWildCardHand: { '4A27T': 6 },
+    bidAmount: 772
+  },
+  {
+    originalHand: { '2789J': 6 },
+    jWildCardHand: { '2789J': 6 },
+    bidAmount: 954
+  },
+  {
+    originalHand: { '7T77T': 2 },
+    jWildCardHand: { '7T77T': 2 },
+    bidAmount: 212
+  },
+  {
+    originalHand: { T49J2: 6 },
+    jWildCardHand: { T49J2: 6 },
+    bidAmount: 102
+  },
+  {
+    originalHand: { TT97T: 3 },
+    jWildCardHand: { TT97T: 3 },
+    bidAmount: 425
+  },
+  {
+    originalHand: { '4666K': 3 },
+    jWildCardHand: { '4666K': 3 },
+    bidAmount: 900
+  },
+  {
+    originalHand: { QQ38Q: 3 },
+    jWildCardHand: { QQ38Q: 3 },
+    bidAmount: 885
+  },
+  {
+    originalHand: { TT44J: 4 },
+    jWildCardHand: { TT44T: 2 },
+    bidAmount: 89
+  },
+  {
+    originalHand: { '77A66': 4 },
+    jWildCardHand: { '77A66': 4 },
+    bidAmount: 740
+  },
+  {
+    originalHand: { '5867T': 6 },
+    jWildCardHand: { '5867T': 6 },
+    bidAmount: 517
+  },
+  {
+    originalHand: { '2TTT2': 2 },
+    jWildCardHand: { '2TTT2': 2 },
+    bidAmount: 349
+  },
+  {
+    originalHand: { Q443Q: 4 },
+    jWildCardHand: { Q443Q: 4 },
+    bidAmount: 338
+  },
+  {
+    originalHand: { J5995: 4 },
+    jWildCardHand: { '95995': 2 },
+    bidAmount: 980
+  },
+  {
+    originalHand: { '2A3K7': 6 },
+    jWildCardHand: { '2A3K7': 6 },
+    bidAmount: 350
+  },
+  {
+    originalHand: { JKK23: 5 },
+    jWildCardHand: { KKK23: 3 },
+    bidAmount: 214
+  },
+  {
+    originalHand: { J38T4: 6 },
+    jWildCardHand: { J38T4: 6 },
+    bidAmount: 481
+  },
+  {
+    originalHand: { '255Q2': 4 },
+    jWildCardHand: { '255Q2': 4 },
+    bidAmount: 228
+  },
+  {
+    originalHand: { '98898': 2 },
+    jWildCardHand: { '98898': 2 },
+    bidAmount: 922
+  },
+  {
+    originalHand: { '7Q74Q': 4 },
+    jWildCardHand: { '7Q74Q': 4 },
+    bidAmount: 915
+  },
+  {
+    originalHand: { '54544': 2 },
+    jWildCardHand: { '54544': 2 },
+    bidAmount: 976
+  },
+  {
+    originalHand: { '99349': 3 },
+    jWildCardHand: { '99349': 3 },
+    bidAmount: 73
+  },
+  {
+    originalHand: { TATJA: 4 },
+    jWildCardHand: { TATAA: 2 },
+    bidAmount: 382
+  },
+  {
+    originalHand: { '335J3': 3 },
+    jWildCardHand: { '33533': 1 },
+    bidAmount: 107
+  },
+  {
+    originalHand: { '25222': 1 },
+    jWildCardHand: { '25222': 1 },
+    bidAmount: 950
+  },
+  {
+    originalHand: { TJ7T8: 5 },
+    jWildCardHand: { TT7T8: 3 },
+    bidAmount: 554
+  },
+  ... 900 more items
+]
