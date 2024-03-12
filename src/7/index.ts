@@ -183,43 +183,43 @@ function getCardHandsInWeakestToStrongestOrder(cardValueMappingsArr: CardValueMa
 
 // sample data test
 
-// const samplePuzzleInputMap: CardValueMapping[] = [
-//     {
-//         originalHand: { "32T3K": getCardHandType("32T3K") },
-//         jWildCardHand: {
-//             [getCardHandWithJCardSubstitutes("32T3K")]: getCardHandType(getCardHandWithJCardSubstitutes("32T3K"))
-//         },
-//         bidAmount: 765
-//     },
-//     {
-//         originalHand: { T55J5: getCardHandType("T55J5") },
-//         jWildCardHand: {
-//             [getCardHandWithJCardSubstitutes("T55J5")]: getCardHandType(getCardHandWithJCardSubstitutes("T55J5"))
-//         },
-//         bidAmount: 684
-//     },
-//     {
-//         originalHand: { KK677: getCardHandType("KK677") },
-//         jWildCardHand: {
-//             [getCardHandWithJCardSubstitutes("KK677")]: getCardHandType(getCardHandWithJCardSubstitutes("KK677"))
-//         },
-//         bidAmount: 28
-//     },
-//     {
-//         originalHand: { KTJJT: getCardHandType("KTJJT") },
-//         jWildCardHand: {
-//             [getCardHandWithJCardSubstitutes("KTJJT")]: getCardHandType(getCardHandWithJCardSubstitutes("KTJJT"))
-//         },
-//         bidAmount: 220
-//     },
-//     {
-//         originalHand: { QQQJA: getCardHandType("QQQJA") },
-//         jWildCardHand: {
-//             [getCardHandWithJCardSubstitutes("QQQJA")]: getCardHandType(getCardHandWithJCardSubstitutes("QQQJA"))
-//         },
-//         bidAmount: 483
-//     }
-// ];
+const samplePuzzleInputMap: CardValueMapping[] = [
+    {
+        originalHand: { "32T3K": getCardHandType("32T3K") },
+        jWildCardHand: {
+            [getCardHandWithJCardSubstitutes("32T3K")]: getCardHandType(getCardHandWithJCardSubstitutes("32T3K"))
+        },
+        bidAmount: 765
+    },
+    {
+        originalHand: { T55J5: getCardHandType("T55J5") },
+        jWildCardHand: {
+            [getCardHandWithJCardSubstitutes("T55J5")]: getCardHandType(getCardHandWithJCardSubstitutes("T55J5"))
+        },
+        bidAmount: 684
+    },
+    {
+        originalHand: { KK677: getCardHandType("KK677") },
+        jWildCardHand: {
+            [getCardHandWithJCardSubstitutes("KK677")]: getCardHandType(getCardHandWithJCardSubstitutes("KK677"))
+        },
+        bidAmount: 28
+    },
+    {
+        originalHand: { KTJJT: getCardHandType("KTJJT") },
+        jWildCardHand: {
+            [getCardHandWithJCardSubstitutes("KTJJT")]: getCardHandType(getCardHandWithJCardSubstitutes("KTJJT"))
+        },
+        bidAmount: 220
+    },
+    {
+        originalHand: { QQQJA: getCardHandType("QQQJA") },
+        jWildCardHand: {
+            [getCardHandWithJCardSubstitutes("QQQJA")]: getCardHandType(getCardHandWithJCardSubstitutes("QQQJA"))
+        },
+        bidAmount: 483
+    }
+];
 
 function getSumOfRankValues(cardValueMappingsArr: CardValueMapping[], key: KeyType): number {
     return getCardHandsInWeakestToStrongestOrder(cardValueMappingsArr, key)
@@ -237,25 +237,25 @@ function getSumOfRankValues(cardValueMappingsArr: CardValueMapping[], key: KeyTy
     let puzzleInputAsArr: string[] = await getFileLinesAsArr(absoluteFilePathPuzzleInput);
 
     let cardValueMappingsArr: CardValueMapping[] = [];
-    // puzzleInputAsArr.forEach((line: string) => {
-    //     const [cardHand, cardBidAmount] = line.split(" ");
+    puzzleInputAsArr.forEach((line: string) => {
+        const [cardHand, cardBidAmount] = line.split(" ");
 
-    //     let jWildCardHandVersion = getCardHandWithJCardSubstitutes(cardHand);
-    //     let obj: CardValueMapping = {
-    //         originalHand: {},
-    //         jWildCardHand: {},
-    //         bidAmount: Number(cardBidAmount)
-    //     };
-    //     obj.originalHand[cardHand] = getCardHandType(cardHand);
-    //     obj.jWildCardHand[jWildCardHandVersion] = getCardHandType(jWildCardHandVersion);
+        let jWildCardHandVersion = getCardHandWithJCardSubstitutes(cardHand);
+        let obj: CardValueMapping = {
+            originalHand: {},
+            jWildCardHand: {},
+            bidAmount: Number(cardBidAmount)
+        };
+        obj.originalHand[cardHand] = getCardHandType(cardHand);
+        obj.jWildCardHand[jWildCardHandVersion] = getCardHandType(jWildCardHandVersion);
 
-    //     cardValueMappingsArr.push(obj);
-    // });
+        cardValueMappingsArr.push(obj);
+    });
 
     // console.log(cardValueMappingsArr);
 
-    // console.log(`part 1 answer = ${getSumOfRankValues(samplePuzzleInputMap, "originalHand")}`);
-    // console.log(`${getSumOfRankValues(samplePuzzleInputMap, "jWildCardHand")}`);
+    console.log(`part 1 answer = ${getSumOfRankValues(cardValueMappingsArr, "originalHand")}`);
+    console.log(`part 2 answer = ${getSumOfRankValues(cardValueMappingsArr, "jWildCardHand")}`);
 
     // console.log("test", getCardHandWithJCardSubstitutes("KTJJT"));
     // console.log(cardToJWildCardMap);
