@@ -1,5 +1,5 @@
 
-## Advent Of Code 2023 TypeScript Implementations
+## Advent Of Code 2023 TypeScript Implementations/Solutions
 ### how to run
 
 from project root run
