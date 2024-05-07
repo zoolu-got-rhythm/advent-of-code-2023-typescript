@@ -26,7 +26,6 @@ function getAllDiffArrsUntilArrWithAllZerosIsReached(arr: number[]): number[][] 
     let parentArr = [];
     let diffArr = arr;
     while (!checkAllNumbersInArrAreZero(diffArr)) {
-        // the gotcha' could be here
         diffArr = getDiffArr(diffArr);
         parentArr.push(diffArr);
     }
@@ -65,5 +64,4 @@ const absoluteFilePathPuzzleInput = `${__dirname}/../../src/9/puzzleInput.txt`;
         .reduce((prev, acum) => prev + acum);
 
     console.log("part 1 result =", part1Result);
- 
 })();
