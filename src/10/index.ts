@@ -31,7 +31,6 @@ const validPositionsFromStart = {
 };
 
 export function getNextPositions(x: number, y: number, arr2d: string[][], previousPos: Coords2d): Coords2d[] {
-    console.log("running");
     const pipeSymbolAtCurrentTile = arr2d[y][x] as PipeSymbol;
     const leftPipe = arr2d[y][x - 1];
     const rightPipe = arr2d[y][x + 1];
@@ -125,50 +124,45 @@ export function getDirectionsCanGoFromStartPosition(x: number, y: number, arr2d:
     return validNextPositions;
 }
 
-// function getPositionAndLengthTakenToDestination(arr2d: string[][]): [Coords2d, PipeSymbol, number] {
-//     let startingPosCoords: Coords2d;
-//     outerLoop: for (let y = 0; y < arr2d.length; y++) {
-//         for (let x = 0; x < arr2d[y].length; x++) {
-//             const currentTile = arr2d[y][x];
-//             if (currentTile === "S") {
-//                 startingPosCoords = { x, y };
-//                 break outerLoop;
-//             }
-//         }
-//     }
+function getPathsMap(arr2d: string[][]): { [key: string]: string[] } {
+    let startingPosCoords: Coords2d;
+    outerLoop: for (let y = 0; y < arr2d.length; y++) {
+        for (let x = 0; x < arr2d[y].length; x++) {
+            const currentTile = arr2d[y][x];
+            if (currentTile === "S") {
+                startingPosCoords = { x, y };
+                break outerLoop;
+            }
+        }
+    }
 
-//     let positionsCanGo = getDirectionsCanGoFromStartPosition(startingPosCoords!.x, startingPosCoords!.y, arr2d);
+    let positionsCanGo = getDirectionsCanGoFromStartPosition(startingPosCoords!.x, startingPosCoords!.y, arr2d);
 
-//     const positionsPathsMap = {};
+    const positionsPathsMap = {};
 
-//     for (let i = 0; i < 1; i++) {
-//         let a = positionsCanGo[i];
+    for (let i = 0; i < positionsCanGo.length; i++) {
+        let currentPathArr: Coords2d[] = [];
 
-//         let currentPathArr: Coords2d[] = [];
+        let nextPos = positionsCanGo[i];
+        let prevPos = startingPosCoords!;
 
-//         let nextPos = { count: 1, tile: getNextPositions(a.x, a.y, arr2d)[0] };
+        while (arr2d[nextPos.y][nextPos.x] !== "S") {
+            const copyOfNextPos = { ...nextPos };
+            nextPos = getNextPositions(nextPos.x, nextPos.y, arr2d, prevPos!)[0];
+            prevPos = copyOfNextPos;
+            currentPathArr.push(copyOfNextPos);
+        }
 
-//         console.log("the next pos", nextPos);
+        currentPathArr.push(nextPos);
 
-//         currentPathArr.push({ x: nextPos.tile.x, y: nextPos.tile.y });
 
-//         while (nextPos.tile) {
-//             nextPos = {
-//                 count: nextPos.count + 1,
-//                 tile: getNextPositions(nextPos.tile.x, nextPos.tile.y, arr2d, nextPos.tile)[0]
-//             };
-//             currentPathArr.push({ x: nextPos.tile.x, y: nextPos.tile.y });
-//         }
+        let pathKeyName = `path-${i + 1}`;
+        // @ts-ignore
+        positionsPathsMap[pathKeyName] = currentPathArr;
+    }
 
-//         let pathKeyName = `path-${i + 1}`;
-//         // @ts-ignore
-//         positionsPathsMap[pathKeyName] = currentPathArr;
-//     }
-
-//     console.log("paths map", positionsPathsMap);
-
-//     return [startingPosCoords!, "-", 5];
-// }
+    return positionsPathsMap;
+}
 
 (async () => {
     const absoluteFilePathSamplePuzzleInput = `${__dirname}/../../src/10/samplePuzzleInput.txt`;
@@ -177,6 +171,6 @@ export function getDirectionsCanGoFromStartPosition(x: number, y: number, arr2d:
         return row.split("").map((pipeSymbol: string) => pipeSymbol);
     });
 
-    const actualCoordsCanGoToArr = getNextPositions(3, 1, puzzleInputAs2dArr, { x: 2, y: 1 });
-    // console.log("test", getPositionAndLengthTakenToDestination(puzzleInputAs2dArr));
+    const pathsMap = getPathsMap(puzzleInputAs2dArr);
+    console.log("paths map", pathsMap);
 })();
