@@ -1,0 +1,7 @@
+key algorithms and concepts to solve day 10/2023
+
+polygon ray casting algorithm to solve part 2: 
+https://en.wikipedia.org/wiki/Point_in_polygon#:~:text=Ray%20casting%20algorithm,-See%20also%3A%20Jordan&text=If%20the%20point%20is%20on,an%20odd%20number%20of%20times.
+
+another algorithm to learn and think about (which is used in alot of pain programs) is the flood fill algorithm
+https://en.wikipedia.org/wiki/Flood_fill

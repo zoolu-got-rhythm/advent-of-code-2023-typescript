@@ -1,4 +1,4 @@
-import { Coords2d, getDirectionsCanGoFromStartPosition, getNextPositions } from ".";
+import { Coords2d, getDirectionsCanGoFromStartPosition, getNextPosition } from ".";
 import { getFileLinesAsArr } from "../utils/getFileLinesAsArr";
 
 const absoluteFilePathSamplePuzzleInput = `${__dirname}/../../src/10/samplePuzzleInput.txt`;
@@ -26,42 +26,42 @@ describe("getDirectionsCanGoFromStartPosition", () => {
 
 describe("getNextPositions", () => {
     test("given the sample puzzle input, when on tile {x: 2, y: 1} ('-') the next position to go to is [{x: 3, y: 1}] ('7') ", () => {
-        const actualCoordsCanGoToArr = getNextPositions(2, 1, puzzleInputAs2dArr, { x: 1, y: 1 });
+        const actualCoordsCanGoToArr = getNextPosition(2, 1, puzzleInputAs2dArr, { x: 1, y: 1 });
         const expectedCoordsCanGoToArr: Coords2d[] = [{ x: 3, y: 1 }];
 
         expect(actualCoordsCanGoToArr).toEqual(expectedCoordsCanGoToArr);
-        expect(puzzleInputAs2dArr[actualCoordsCanGoToArr[0].y][actualCoordsCanGoToArr[0].x]).toEqual("7");
+        expect(puzzleInputAs2dArr[actualCoordsCanGoToArr.y][actualCoordsCanGoToArr.x]).toEqual("7");
     });
 
     test("given the sample puzzle input, when on tile {x: 3, y: 1} ('7') and the known previous tile was at {x: 2, y: 1} the next position to go to is [{x: 3, y: 2}] ('|') ", () => {
-        const actualCoordsCanGoToArr = getNextPositions(3, 1, puzzleInputAs2dArr, { x: 2, y: 1 });
+        const actualCoordsCanGoToArr = getNextPosition(3, 1, puzzleInputAs2dArr, { x: 2, y: 1 });
         const expectedCoordsCanGoToArr: Coords2d[] = [{ x: 3, y: 2 }];
 
         expect(actualCoordsCanGoToArr).toEqual(expectedCoordsCanGoToArr);
-        expect(puzzleInputAs2dArr[actualCoordsCanGoToArr[0].y][actualCoordsCanGoToArr[0].x]).toEqual("|");
+        expect(puzzleInputAs2dArr[actualCoordsCanGoToArr.y][actualCoordsCanGoToArr.x]).toEqual("|");
     });
 
     test("given the sample puzzle input, when on tile { x: 3, y: 2 } ('|') and the known previous tile was at {x: 3, y: 1} ('7') the next position to go to is [{x: 3, y: 3}] ('J') ", () => {
-        const actualCoordsCanGoToArr = getNextPositions(3, 2, puzzleInputAs2dArr, { x: 3, y: 1 });
+        const actualCoordsCanGoToArr = getNextPosition(3, 2, puzzleInputAs2dArr, { x: 3, y: 1 });
         const expectedCoordsCanGoToArr: Coords2d[] = [{ x: 3, y: 3 }];
 
         expect(actualCoordsCanGoToArr).toEqual(expectedCoordsCanGoToArr);
-        expect(puzzleInputAs2dArr[actualCoordsCanGoToArr[0].y][actualCoordsCanGoToArr[0].x]).toEqual("J");
+        expect(puzzleInputAs2dArr[actualCoordsCanGoToArr.y][actualCoordsCanGoToArr.x]).toEqual("J");
     });
 
-    test("given the sample puzzle input, when on tile { x: 3, y: 23} ('J') and the known previous tile was at {x: 3, y: 2} ('|') the next position to go to is [{x: 2, y: 3}] ('-') ", () => {
-        const actualCoordsCanGoToArr = getNextPositions(3, 3, puzzleInputAs2dArr, { x: 3, y: 2 });
+    test("given the sample puzzle input, when on tile { x: 3, y: 3} ('J') and the known previous tile was at {x: 3, y: 2} ('|') the next position to go to is [{x: 2, y: 3}] ('-') ", () => {
+        const actualCoordsCanGoToArr = getNextPosition(3, 3, puzzleInputAs2dArr, { x: 3, y: 2 });
         const expectedCoordsCanGoToArr: Coords2d[] = [{ x: 2, y: 3 }];
 
         expect(actualCoordsCanGoToArr).toEqual(expectedCoordsCanGoToArr);
-        expect(puzzleInputAs2dArr[actualCoordsCanGoToArr[0].y][actualCoordsCanGoToArr[0].x]).toEqual("-");
+        expect(puzzleInputAs2dArr[actualCoordsCanGoToArr.y][actualCoordsCanGoToArr.x]).toEqual("-");
     });
 
     test("given the sample puzzle input, when on tile { x: 1, y: 1 } ('|') and the known previous tile was at {x: 1, y: 3} ('L') the next position to go to is [{x: 1, y: 1}] ('S') ", () => {
-        const actualCoordsCanGoToArr = getNextPositions(1, 2, puzzleInputAs2dArr, { x: 1, y: 3 });
+        const actualCoordsCanGoToArr = getNextPosition(1, 2, puzzleInputAs2dArr, { x: 1, y: 3 });
         const expectedCoordsCanGoToArr: Coords2d[] = [{ x: 1, y: 1 }];
 
         expect(actualCoordsCanGoToArr).toEqual(expectedCoordsCanGoToArr);
-        expect(puzzleInputAs2dArr[actualCoordsCanGoToArr[0].y][actualCoordsCanGoToArr[0].x]).toEqual("S");
+        expect(puzzleInputAs2dArr[actualCoordsCanGoToArr.y][actualCoordsCanGoToArr.x]).toEqual("S");
     });
 });
