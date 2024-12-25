@@ -155,11 +155,9 @@ function getPathsMap(arr2d: string[][]): { [key: string]: NextPosition[] } {
         let nextPos = positionsCanGo[i];
         let prevPos = startingPosCoords!;
 
-        // console.log("next pos", nextPos);
         while (arr2d[nextPos.y][nextPos.x] !== "S") {
             const copyOfNextPos = { ...nextPos };
             nextPos = getNextPosition(nextPos.x, nextPos.y, arr2d, prevPos!);
-            // console.log("next pos", nextPos);
 
             prevPos = copyOfNextPos;
             currentPathArr.push(copyOfNextPos);
@@ -175,36 +173,13 @@ function getPathsMap(arr2d: string[][]): { [key: string]: NextPosition[] } {
     return positionsPathsMap;
 }
 
-// function getIntersectingCoordinatesOfPaths(pathsMap: { [key: string]: string[] }): Coords2d {
-//     for (let i = 0; i < pathsMap["path-1"].length; i++) {
-//         // @ts-ignorets-ignore
-//         const currentCoordsFromPath1 = pathsMap["path-1"][i] as Coords2d;
-//         for (let j = 0; j < pathsMap["path-2"].length; j++) {
-//             // @ts-ignore
-//             const currentCoordsFromPath2 = pathsMap["path-2"][j] as Coords2d;
-//             if (
-//                 currentCoordsFromPath1.x === currentCoordsFromPath2.x &&
-//                 currentCoordsFromPath1.y === currentCoordsFromPath2.y
-//             ) {
-//                 return currentCoordsFromPath1;
-//             }
-//         }
-//     }
-
-//     // @ts-ignore
-//     return pathsMap["path-1"].filter((coords2d: Coords2d) => pathsMap["path-2"].includes(coords2d))[0];
-// }
-
-function getSymbolOfS(path: { [key: string]: NextPosition[] }) {
-    const start = path["path-1"][path["path-1"].length - 1];
-    const first = path["path-1"][0];
-    const last = path["path-1"][path["path-1"].length - 2];
+function getSymbolOfS(pathsMap: { [key: string]: NextPosition[] }) {
+    const start = pathsMap["path-1"][pathsMap["path-1"].length - 1];
+    const first = pathsMap["path-1"][0];
+    const last = pathsMap["path-1"][pathsMap["path-1"].length - 2];
 
     const firstCoordsRelativeToStart = { x: first.x - start.x, y: first.y - start.y };
     const lastCoordsRelativeToStart = { x: last.x - start.x, y: last.y - start.y };
-
-    // console.log("first", firstCoordsRelativeToStart);
-    // console.log("last", lastCoordsRelativeToStart);
 
     function checkEitherWay(firstCoords: Coords2d, secondCoords: Coords2d, pos: Coords2d) {
         if (firstCoords.x === pos.x && firstCoords.y === pos.y) {
@@ -215,6 +190,9 @@ function getSymbolOfS(path: { [key: string]: NextPosition[] }) {
             return false;
         }
     }
+
+
+    // by checking either way reduces having to do 12 checks to 6 (in half)
 
     // right
     if (checkEitherWay(firstCoordsRelativeToStart, lastCoordsRelativeToStart, { x: 1, y: 0 })) {
@@ -257,31 +235,8 @@ function getSymbolOfS(path: { [key: string]: NextPosition[] }) {
     }
 }
 
-(async () => {
-    const absoluteFilePathSamplePuzzleInput = `${__dirname}/../../src/10/puzzleInput.txt`;
-    const puzzleInputAsStringArrLineByLine: string[] = await getFileLinesAsArr(absoluteFilePathSamplePuzzleInput);
-    const puzzleInputAs2dArr = puzzleInputAsStringArrLineByLine.map((row: string) => {
-        return row.split("").map((pipeSymbol: string) => pipeSymbol);
-    });
-
-    const pathsMap = getPathsMap(puzzleInputAs2dArr);
-    let distanceFromStartingPoint = Math.ceil(pathsMap["path-1"].length / 2);
-    console.log("part 1 answer =", distanceFromStartingPoint);
-
-    // console.log("paths map", pathsMap);
-
-    const symbolOfS = getSymbolOfS(pathsMap);
-    // console.log("symbol of s", symbolOfS);
-
-    const groundTerrain2dArr = puzzleInputAs2dArr.map((row, y) => {
-        return row.map((columnItem, x) => {
-            return ".";
-        });
-    });
-
-    // console.log(groundTerrain2dArr);
-
-    const groundTerrainWithJustPath = puzzleInputAs2dArr.map((row, y) => {
+function countGroundTerrainInsideMazeLoop(arr2dPuzzleInput: string[][], pathsMap: { [key: string]: NextPosition[] }): number {
+    const groundTerrainWithJustPath = arr2dPuzzleInput.map((row, y) => {
         return row.map((columnItem, x) => {
             let found = pathsMap["path-1"].find((nextPosObj) => {
                 return nextPosObj.x === x && nextPosObj.y === y;
@@ -306,7 +261,6 @@ function getSymbolOfS(path: { [key: string]: NextPosition[] }) {
             if (columnItem === ".") {
                 let nOfIntersects = 0;
                 for (let i = x + 1; i < row.length - 1; i++) {
-                    // console.log("i", i);
                     const currentSymbol = row[i];
 
                     if (currentSymbol === "|" || currentSymbol === "J" || currentSymbol === "L") {
@@ -320,7 +274,20 @@ function getSymbolOfS(path: { [key: string]: NextPosition[] }) {
             }
         });
     });
+    return countOfGroundTerrainInsideMaze;
+}
+
+(async () => {
+    const absoluteFilePathSamplePuzzleInput = `${__dirname}/../../src/10/puzzleInput.txt`;
+    const puzzleInputAsStringArrLineByLine: string[] = await getFileLinesAsArr(absoluteFilePathSamplePuzzleInput);
+    const puzzleInputAs2dArr = puzzleInputAsStringArrLineByLine.map((row: string) => {
+        return row.split("").map((pipeSymbol: string) => pipeSymbol);
+    });
+
+    const pathsMap = getPathsMap(puzzleInputAs2dArr);
+    let distanceFromStartingPoint = Math.ceil(pathsMap["path-1"].length / 2);
+    console.log("part 1 answer =", distanceFromStartingPoint);
 
     // console.log(groundTerrainWithJustPath);
-    console.log("part 2 answer = ", countOfGroundTerrainInsideMaze);
+    console.log("part 2 answer = ", countGroundTerrainInsideMazeLoop(puzzleInputAs2dArr, pathsMap));
 })();
